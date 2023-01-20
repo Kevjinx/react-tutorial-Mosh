@@ -18,18 +18,18 @@ class Counters extends Component {
 				{this.state.counters.map(counter =>
 					<Counter
 						key={counter.id}
-						id={counter.id}
-						value={counter.value}
 						onDelete={this.handleDelete}
+						//deconstruct counter object for cleaner code, and so that in the future, we just need to modify the counter object, and not the counter component
+						counter={counter}
 					/>)}
 			</div>
 		)
 	}
 
 	handleDelete = (counterId) => {
-		this.setState({
-
-		})
+		//creating new array for counters because we cannot modify state directly in react. Then we set the state to the new array with the new counters
+		const counters = this.state.counters.filter(counter => counter.id !== counterId)
+		this.setState({ counters })
 		console.log('delete event handler called', counterId)
 	}
 

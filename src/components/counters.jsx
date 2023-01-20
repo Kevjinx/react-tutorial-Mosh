@@ -12,15 +12,38 @@ class Counters extends Component {
 		]
 	};
 
+	handleIncrement = (counter) => {
+		console.log('increment')
+		const counters = this.state.counters;
+		//find the counter that was incremented, and increment its value
+		counters.filter(c => c.id === counter.id)[0].value++;
+		this.setState({ counters })
+	}
+
+	handleReset = () => {
+		console.log('reset');
+	  const counters = this.state.counters.map(counter => {
+			counter.value = 0;
+	    return counter;
+	  });
+		this.setState({ counters })
+	}
 	counterList = () => {
 		return (
 			<div>
+				<button
+					onClick={this.handleReset}
+					className="btn btn-primary btn-sm m-2"
+				>
+					reset
+				</button>
 				{this.state.counters.map(counter =>
 					<Counter
 						key={counter.id}
 						onDelete={this.handleDelete}
 						//deconstruct counter object for cleaner code, and so that in the future, we just need to modify the counter object, and not the counter component
 						counter={counter}
+						onIncrement={this.handleIncrement}
 					/>)}
 			</div>
 		)

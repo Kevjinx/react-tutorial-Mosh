@@ -14,8 +14,8 @@ class Counters extends Component {
 
 	handleIncrement = (counter) => {
 		console.log('increment')
-		const counters = this.state.counters;
-		//find the counter that was incremented, and increment its value
+		//create a new counters obj, find the counter that was incremented, and increment its value, and set the state to the new counters obj
+		const counters = [...this.state.counters];
 		counters.filter(c => c.id === counter.id)[0].value++;
 		this.setState({ counters })
 	}
